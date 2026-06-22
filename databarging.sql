@@ -1,8 +1,8 @@
 -- MySQL dump 10.13  Distrib 8.0.41, for macos15 (x86_64)
 --
--- Host: localhost    Database: databarging
+-- Host: 127.0.0.1    Database: databarging
 -- ------------------------------------------------------
--- Server version	9.6.0
+-- Server version	8.0.41
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,14 +14,14 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-SET @MYSQLDUMP_TEMP_LOG_BIN = @@SESSION.SQL_LOG_BIN;
-SET @@SESSION.SQL_LOG_BIN= 0;
 
 --
--- GTID state at the beginning of the backup 
+-- Current Database: `databarging`
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ '79e39d00-69fd-11f1-a470-1fba47373d8d:1-156';
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `databarging` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `databarging`;
 
 --
 -- Table structure for table `barge_operations`
@@ -43,11 +43,11 @@ CREATE TABLE `barge_operations` (
   `completed_discharging` datetime DEFAULT NULL,
   `clear_pass` datetime DEFAULT NULL,
   `qty_ds` decimal(12,2) DEFAULT NULL,
-  `flf` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `operation_status` enum('DRAFT','IN_PROGRESS','COMPLETED') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
+  `flf` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `operation_status` enum('DRAFT','IN_PROGRESS','COMPLETED') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'DRAFT',
   `operation_data` json DEFAULT NULL,
-  `remarks` text COLLATE utf8mb4_unicode_ci,
-  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -77,12 +77,12 @@ DROP TABLE IF EXISTS `barges`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `barges` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tugboat` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barge` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vendor` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `kontrak` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tugboat` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barge` varchar(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kontrak` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `muatan` decimal(12,2) DEFAULT NULL,
-  `penalty` varchar(80) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `penalty` varchar(80) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -109,10 +109,10 @@ DROP TABLE IF EXISTS `flf`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `flf` (
-  `floating_crane` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `vendor_flf` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pbm` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `anchorage` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `floating_crane` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `vendor_flf` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pbm` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anchorage` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`floating_crane`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -135,8 +135,8 @@ DROP TABLE IF EXISTS `jetty`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `jetty` (
-  `jetty` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_panjang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jetty` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_panjang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`jetty`),
   UNIQUE KEY `uq_jetty_code` (`jetty`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -160,9 +160,9 @@ DROP TABLE IF EXISTS `shipper`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `shipper` (
-  `shipper` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pt` varchar(150) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_lengkap` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipper` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pt` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_lengkap` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`shipper`),
   UNIQUE KEY `uq_shipper_code` (`shipper`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -187,29 +187,29 @@ DROP TABLE IF EXISTS `sibarges`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sibarges` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `no_pk` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_si_vessel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `buyer` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mothervessel` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `si_type` enum('SJN','SNP') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_pk` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_si_vessel` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buyer` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mothervessel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `si_type` enum('SJN','SNP') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `month_num` tinyint unsigned NOT NULL,
   `year_num` smallint unsigned NOT NULL,
   `barge_seq` int unsigned NOT NULL,
-  `si_barges` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tugboat` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `barge` varchar(160) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `term` enum('FOB','FAS','CIF') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `anchorage` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `si_barges` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tugboat` varchar(120) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `barge` varchar(160) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `term` enum('FOB','FAS','CIF') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `anchorage` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `qty_plan` decimal(12,2) NOT NULL DEFAULT '0.00',
   `laycan_start` date DEFAULT NULL,
   `laycan_end` date DEFAULT NULL,
-  `jetty_code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `jetty_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `shipper_code` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `shipper_name` text COLLATE utf8mb4_unicode_ci,
-  `record_status` enum('ACT','CANCEL') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ACT',
-  `remarks` text COLLATE utf8mb4_unicode_ci,
-  `created_by` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jetty_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `jetty_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipper_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipper_name` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `record_status` enum('ACT','CANCEL') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'ACT',
+  `remarks` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_by` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -244,12 +244,12 @@ DROP TABLE IF EXISTS `vessel`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vessel` (
-  `no_pk` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `no_si_vessel` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `buyer` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mothervessel` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `anchorage` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `term` enum('FOB','FAS','CIF') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_pk` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_si_vessel` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `buyer` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mothervessel` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `anchorage` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `term` enum('FOB','FAS','CIF') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `laycan_start` date DEFAULT NULL,
   `laycan_end` date DEFAULT NULL,
   `ta_vessel` date DEFAULT NULL,
@@ -276,7 +276,14 @@ LOCK TABLES `vessel` WRITE;
 INSERT INTO `vessel` VALUES ('C.25-055','063','BCPCL','MV. ROYAL IMAGE',NULL,NULL,'2025-11-20','2025-11-29','2025-11-26',55750.00,0.00,55750.00,0.00,'2025-12-15 11:04:02',NULL),('G.25-052','060','BCPCL','MV. KENZEN',NULL,NULL,'2025-11-05','2025-11-14','2025-11-07',60500.00,0.00,60500.00,0.00,'2025-12-15 10:21:54',NULL),('G.25-246','063','ABOITIZ','MV. MERCUR STAR',NULL,NULL,'2025-11-23','2025-12-02','2025-11-24',1780.00,75220.00,77000.00,0.00,'2025-12-15 11:04:02',NULL),('G.25-281','062','IRNC','MV. ANDHIKA ALISHA',NULL,NULL,'2025-11-13','2025-11-22','2025-11-15',74700.00,0.00,74700.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-018','167','TANJUNG JATI B','MV. PRIMA ANDALAN I',NULL,NULL,'2025-11-26','2025-12-05','2025-11-16',0.00,67000.00,67000.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-022','165','IP SURALAYA','MV. RAFA',NULL,NULL,'2025-11-17','2025-11-21','2025-11-13',50362.00,0.00,50362.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-063','163','BCPCL','MV. SPINEL',NULL,NULL,'2025-11-11','2025-11-20','2025-11-15',60500.00,0.00,60500.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-110','164','TNBF','MV. SFL YANGTZE',NULL,NULL,'2025-11-16','2025-11-25','2025-11-24',28130.00,50120.00,78250.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-178','160','JAWA POWER','MV. MURSYID',NULL,NULL,'2025-11-05','2025-11-09','2025-11-04',55000.00,0.00,55000.00,0.00,'2025-12-15 10:21:54',NULL),('M.25-192','162','MISEC','MV. NOZOMI',NULL,NULL,'2025-11-08','2025-11-17','2025-11-08',20489.00,23011.00,43500.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-220','161','TNBF','MV. TAI CHANG',NULL,NULL,'2025-11-06','2025-11-15','2025-11-08',43785.00,43615.00,87400.00,0.00,'2025-12-15 11:04:02',NULL),('M.25-283','176','MISEC','MV. SAKURA BREEZE',NULL,NULL,'2025-12-18','2025-12-27','2025-12-18',0.00,0.00,41085.00,0.00,'2025-12-16 10:58:05',NULL),('M.26-006','069','TNBF','MV. MARINER K','MUARA BERAU','FOB','2026-05-23','2026-06-01','2026-05-27',0.00,78700.00,78700.00,0.00,'2026-06-17 09:42:24','2026-06-18 05:03:27');
 /*!40000 ALTER TABLE `vessel` ENABLE KEYS */;
 UNLOCK TABLES;
-SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
+
+--
+-- Dumping events for database 'databarging'
+--
+
+--
+-- Dumping routines for database 'databarging'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -287,4 +294,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-06-19 17:00:59
+-- Dump completed on 2026-06-22 10:17:12

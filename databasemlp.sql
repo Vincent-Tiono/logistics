@@ -1,69 +1,69 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
+-- MySQL dump 10.13  Distrib 8.0.41, for macos15 (x86_64)
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Jun 15, 2026 at 12:11 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
+-- Host: 127.0.0.1    Database: databasemlp
+-- ------------------------------------------------------
+-- Server version	8.0.41
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `databasemlp`
+-- Current Database: `databasemlp`
 --
 
--- --------------------------------------------------------
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `databasemlp` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `databasemlp`;
 
 --
 -- Table structure for table `usermlp`
 --
 
+DROP TABLE IF EXISTS `usermlp`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usermlp` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `jabatan` enum('Div. Head','Dept. Head','Sect. Head','SPV','Staff') NOT NULL DEFAULT 'Staff',
-  `divisi` enum('IT','Operation','VM&FAT','Finance&Accounting') NOT NULL DEFAULT 'Operation',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `username` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `jabatan` varchar(100) DEFAULT NULL,
+  `divisi` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `usermlp`
 --
 
-INSERT INTO `usermlp` (`username`, `password`, `jabatan`, `divisi`, `created_at`) VALUES
-('admin', 'snpsjn', 'SPV', 'IT', '2025-12-15 07:22:40'),
-('dhea', 'snpsjn', 'Staff', 'Operation', '2025-12-15 10:13:13'),
-('farida', 'snpsjn', 'Sect. Head', 'Finance&Accounting', '2025-12-15 10:13:41'),
-('gunawan', 'snpsjn', 'SPV', 'Operation', '2025-12-15 07:22:40'),
-('inaya', 'snpsjn', 'Staff', 'VM&FAT', '2025-12-15 07:22:40'),
-('indra', 'snpsjn', 'Sect. Head', 'Operation', '2025-12-15 10:13:30'),
-('jantri', 'snpsjn', 'Sect. Head', 'Operation', '2025-12-15 10:19:25'),
-('nataya', 'snpsjn', 'SPV', 'Operation', '2025-12-15 07:22:40'),
-('novita', 'snpsjn', 'Dept. Head', 'Finance&Accounting', '2025-12-15 10:13:01'),
-('roseni', 'snpsjn', 'Sect. Head', 'Finance&Accounting', '2025-12-15 10:13:51'),
-('wilson', 'snpsjn', 'SPV', 'Operation', '2025-12-15 07:22:40'),
-('yusron', 'snpsjn', 'Dept. Head', 'Operation', '2025-12-15 10:12:46');
+LOCK TABLES `usermlp` WRITE;
+/*!40000 ALTER TABLE `usermlp` DISABLE KEYS */;
+INSERT INTO `usermlp` VALUES ('admin','admin123','Admin','IT');
+/*!40000 ALTER TABLE `usermlp` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
--- Indexes for dumped tables
+-- Dumping events for database 'databasemlp'
 --
 
 --
--- Indexes for table `usermlp`
+-- Dumping routines for database 'databasemlp'
 --
-ALTER TABLE `usermlp`
-  ADD PRIMARY KEY (`username`);
-COMMIT;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2026-06-22 10:17:19
