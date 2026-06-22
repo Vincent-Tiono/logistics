@@ -9,10 +9,13 @@ if (isset($_SESSION['username'])) {
 
 $error = '';
 
-// koneksi langsung di sini dulu (sesuai request: 3 file dulu)
-$koneksi = mysqli_connect("127.0.0.1", "root", "", "databasemlp", 3306);
-if (!$koneksi) {
-    die("Koneksi DB gagal: " . mysqli_connect_error());
+require_once __DIR__ . '/config/database.php';
+
+try {
+    $koneksi = db_connect('databasemlp');
+} catch (RuntimeException $exception) {
+    http_response_code(500);
+    die(htmlspecialchars($exception->getMessage(), ENT_QUOTES, 'UTF-8'));
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
